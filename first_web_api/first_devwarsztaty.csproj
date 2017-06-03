@@ -14,10 +14,13 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="RawRabbit" Version="1.10.3" />
     <PackageReference Include="RawRabbit.vNext" Version="1.10.3" />
+    <PackageReference Include="third_devwarsztaty" Version="1.*" />
   </ItemGroup>
 
+  <!--
   <ItemGroup>
     <ProjectReference Include="..\third_devwarsztaty\third_devwarsztaty.csproj" />
   </ItemGroup>
+  -->
 
 </Project>
