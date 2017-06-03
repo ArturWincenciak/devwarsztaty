@@ -7,5 +7,6 @@ RUN ["dotnet", "build"]
 
 EXPOSE 5050/tcp
 ENV ASPNETCORE_URLS http://*:5050
+ENV ASPNETCORE_ENVIRONMENT Docker
 
 ENTRYPOINT ["dotnet", "run"]
