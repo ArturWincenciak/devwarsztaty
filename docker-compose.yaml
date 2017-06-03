@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+
+start_dependencies:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - rabbitmq    
+    command: rabbitmq:5672
+
+  rabbitmq:
+      image: rabbitmq
+      ports:
+        - '5672:5672'
+
+  api:
+      build: ./first_web_api
+      links: 
+        - rabbitmq
+      ports:
+        - '5050:5050'
+
+  service:
+      build: ./second_web_api
+      links: 
+        - rabbitmq
+      ports:
+        - '5051:5051'
