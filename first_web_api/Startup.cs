@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RawRabbit;
 using RawRabbit.vNext;
-using RawRabbit.vNext.Disposable;
 
 namespace first_devwarsztaty
 {
@@ -48,7 +48,7 @@ namespace first_devwarsztaty
             services.Configure<RabbitMqOptions>(section);
 
             IBusClient client = BusClientFactory.CreateDefault(options);
-            services.AddSingleton(client);
+            services.AddSingleton<IBusClient>(client);
         }
     }
 }
