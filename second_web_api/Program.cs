@@ -12,6 +12,7 @@ namespace second_devwarsztaty
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseUrls("http://*:5051")
                 .Build();
 
             host.Run();
