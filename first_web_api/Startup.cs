@@ -1,5 +1,6 @@
 ﻿using first_devwarsztaty.Framework;
 using first_devwarsztaty.Handlers;
+using first_devwarsztaty.Storages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +33,12 @@ namespace first_devwarsztaty
             // Add framework services.
             services.AddMvc();
             ConfigureRabbitMq(services);
+            ConfigureDatabase(services);
+        }
+
+        private void ConfigureDatabase(IServiceCollection services)
+        {
+            services.AddSingleton<IStorage>(new InMemoryDb());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
