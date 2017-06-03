@@ -1,4 +1,5 @@
 ﻿using first_devwarsztaty.Framework;
+using first_devwarsztaty.Handlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RawRabbit;
 using RawRabbit.vNext;
+using third_devwarsztaty.Commands;
+using third_devwarsztaty.Events;
 
 namespace first_devwarsztaty
 {
@@ -36,7 +39,7 @@ namespace first_devwarsztaty
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+            ConfigureHandlers(app);
             app.UseMvc();
         }
 
@@ -49,6 +52,22 @@ namespace first_devwarsztaty
 
             IBusClient client = BusClientFactory.CreateDefault(options);
             services.AddSingleton<IBusClient>(client);
+
+            services.AddScoped<IEventHandler<RecordCreated>, RecordCreatedHandler>();
+            services.AddScoped<IEventHandler<RecordNotCreated>, RecordNotCreatedHandler>();
+        }
+
+        private void ConfigureHandlers(IApplicationBuilder app)
+        {
+            var client = app.ApplicationServices.GetService<IBusClient>();
+
+            client.SubscribeAsync<RecordCreated>((msg, ctx) =>
+                app.ApplicationServices.GetService
+                    <IEventHandler<RecordCreated>>().HandleAsync(msg));
+
+            client.SubscribeAsync<RecordNotCreated>((msg, ctx) =>
+                app.ApplicationServices.GetService
+                    <IEventHandler<RecordNotCreated>>().HandleAsync(msg));
         }
     }
 }

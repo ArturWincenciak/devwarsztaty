@@ -63,6 +63,5 @@ namespace second_devwarsztaty
                 app.ApplicationServices.GetService
                     <ICommandHandler<CreateRecord>>().HandleAsync(msg));
         }
-
     }
 }

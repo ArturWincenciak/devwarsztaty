@@ -1,6 +1,6 @@
 namespace third_devwarsztaty.Events
 {
-    public class RecordNotCreated
+    public class RecordNotCreated : IEvent
     {
         public string Key { get; }
         public string Reason { get; }
