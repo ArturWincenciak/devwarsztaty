@@ -1,2 +1,5 @@
-# devwarsztaty
-DevWarsztaty
+# devWarsztaty
+
+This project I've made during DevWarsztaty Meetup.
+
+Details about meetup: https://www.meetup.com/devWarsztaty/events/240217899/
