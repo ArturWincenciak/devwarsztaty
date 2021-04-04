@@ -1,4 +1,4 @@
-# devWarsztaty
+# devWarsztaty - [Kraków] ASP.NET Core
 
 This project I've made during DevWarsztaty Meetup.
 
